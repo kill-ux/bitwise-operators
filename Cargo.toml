@@ -1,6 +1,17 @@
 [package]
-name = "eight-booleans"
+name = "eight-booleans"           # crate name (hyphens allowed)
 version = "0.1.0"
+authors = ["Adnane EL Mir <adnane.elmir1@gmail.com>","Mustapha Boutoub <mustaphaboutoubdev@gmail.com>"]
 edition = "2024"
+description = "A small Rust library to store and manipulate 8 booleans in a single byte."
+license = "MIT"
+license-file = "LICENSE"
+readme = "README.md"
+repository = "https://github.com/kill-ux/eight-booleans.git"
+homepage = "https://github.com/kill-ux/eight-booleans.git"
+documentation = "https://github.com/kill-ux/eight-booleans.git"   # optional; docs.rs will host docs after publish
+keywords = ["bitwise", "bits", "flags", "boolean", "byte"]
+categories = ["data-structures", "algorithms"]    # pick from crates.io category list
+publish = true
 
 [dependencies]
