@@ -1,1 +1,1 @@
-# bitwise-operators
+# Eight-booleans

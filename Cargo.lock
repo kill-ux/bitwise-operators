@@ -3,5 +3,5 @@
 version = 4
 
 [[package]]
-name = "bitwise-operators"
+name = "eight-booleans"
 version = "0.1.0"

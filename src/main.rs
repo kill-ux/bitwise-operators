@@ -1,4 +1,5 @@
-use bitwise_operators::BitWise;
+use eight_booleans::BitWise;
+
 
 fn main() {
     let mut booleans = BitWise::new();
