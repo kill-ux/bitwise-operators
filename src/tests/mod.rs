@@ -1,28 +1,121 @@
-pub fn add(a: i32, b: i32) -> i32 {
-    a + b
-}
-
-// This is a really bad adding function, its purpose is to fail in this
-// example.
-#[allow(dead_code)]
-fn bad_add(a: i32, b: i32) -> i32 {
-    a - b
-}
 
 #[cfg(test)]
 mod tests {
-    // Note this useful idiom: importing names from outer (for mod tests) scope.
-    use super::*;
+    use crate::{ByteBool, Index};
 
+    // Tests for Index struct
     #[test]
-    fn test_add() {
-        assert_eq!(add(1, 2), 3);
+    fn test_index_new_valid() {
+        for i in 0..=7 {
+            let index = Index::new(i);
+            assert_eq!(index.get(), i);
+        }
     }
 
     #[test]
-    fn test_bad_add() {
-        // This assert would fire and test will fail.
-        // Please note, that private functions can be tested too!
-        assert_eq!(bad_add(1, 2), 3);
+    #[should_panic]
+    fn test_index_new_invalid() {
+        Index::new(8);
+    }
+
+    #[test]
+    fn test_index_get() {
+        let index = Index::new(5);
+        assert_eq!(index.get(), 5);
+    }
+
+    #[test]
+    fn test_index_from_u8() {
+        let index: Index = 3u8.into();
+        assert_eq!(index.get(), 3);
+    }
+
+    // Tests for ByteBool struct
+    #[test]
+    fn test_byte_bool_new() {
+        let byte_bool = ByteBool::new();
+        for i in 0..=7 {
+            assert_eq!(byte_bool.read(i), false);
+        }
+    }
+
+    #[test]
+    fn test_byte_bool_set_and_read() {
+        let mut byte_bool = ByteBool::new();
+
+        // Set a bit to true
+        byte_bool.set(3, true);
+        assert_eq!(byte_bool.read(3), true);
+
+        // Set a bit to false
+        byte_bool.set(5, true); // first set to true
+        byte_bool.set(5, false); // then set to false
+        assert_eq!(byte_bool.read(5), false);
+
+        // Test other bits are unaffected
+        for i in 0..=7 {
+            if i != 3 {
+                assert_eq!(byte_bool.read(i), false);
+            }
+        }
+    }
+
+    #[test]
+    fn test_byte_bool_set_all() {
+        let mut byte_bool = ByteBool::new();
+        for i in 0..=7 {
+            byte_bool.set(i, true);
+            assert_eq!(byte_bool.read(i), true);
+        }
+        for i in 0..=7 {
+            byte_bool.set(i, false);
+            assert_eq!(byte_bool.read(i), false);
+        }
+    }
+
+    #[test]
+    fn test_byte_bool_toggle() {
+        let mut byte_bool = ByteBool::new();
+
+        // Toggle from 0 to 1
+        byte_bool.toggle(2);
+        assert_eq!(byte_bool.read(2), true);
+
+        // Toggle from 1 to 0
+        byte_bool.toggle(2);
+        assert_eq!(byte_bool.read(2), false);
+    }
+
+    #[test]
+    fn test_byte_bool_clear() {
+        let mut byte_bool = ByteBool::new();
+        for i in 0..=7 {
+            byte_bool.set(i, true);
+        }
+        byte_bool.clear();
+        for i in 0..=7 {
+            assert_eq!(byte_bool.read(i), false);
+        }
+    }
+
+    #[test]
+    #[should_panic]
+    fn test_byte_bool_read_out_of_range() {
+        let byte_bool = ByteBool::new();
+        byte_bool.read(8);
+    }
+
+    #[test]
+    #[should_panic]
+    fn test_byte_bool_set_out_of_range() {
+        let mut byte_bool = ByteBool::new();
+        byte_bool.set(8, true);
+    }
+
+    #[test]
+    #[should_panic]
+    fn test_byte_bool_toggle_out_of_range() {
+        let mut byte_bool = ByteBool::new();
+        byte_bool.toggle(8);
     }
 }
