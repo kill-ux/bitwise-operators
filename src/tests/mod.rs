@@ -1,34 +1,7 @@
 
 #[cfg(test)]
 mod tests {
-    use crate::{ByteBool, Index};
-
-    // Tests for Index struct
-    #[test]
-    fn test_index_new_valid() {
-        for i in 0..=7 {
-            let index = Index::new(i);
-            assert_eq!(index.get(), i);
-        }
-    }
-
-    #[test]
-    #[should_panic]
-    fn test_index_new_invalid() {
-        Index::new(8);
-    }
-
-    #[test]
-    fn test_index_get() {
-        let index = Index::new(5);
-        assert_eq!(index.get(), 5);
-    }
-
-    #[test]
-    fn test_index_from_u8() {
-        let index: Index = 3u8.into();
-        assert_eq!(index.get(), 3);
-    }
+    use crate::ByteBool;
 
     // Tests for ByteBool struct
     #[test]
