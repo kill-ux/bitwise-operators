@@ -6,7 +6,7 @@ mod tests {
     // Tests for ByteBool struct
     #[test]
     fn test_byte_bool_new() {
-        let byte_bool = ByteBool::new();
+        let byte_bool = ByteBool::default();
         for i in 0..=7 {
             assert_eq!(byte_bool.read(i), false);
         }
@@ -14,7 +14,7 @@ mod tests {
 
     #[test]
     fn test_byte_bool_set_and_read() {
-        let mut byte_bool = ByteBool::new();
+        let mut byte_bool = ByteBool::default();
 
         // Set a bit to true
         byte_bool.set(3, true);
@@ -35,7 +35,7 @@ mod tests {
 
     #[test]
     fn test_byte_bool_set_all() {
-        let mut byte_bool = ByteBool::new();
+        let mut byte_bool = ByteBool::default();
         for i in 0..=7 {
             byte_bool.set(i, true);
             assert_eq!(byte_bool.read(i), true);
@@ -48,7 +48,7 @@ mod tests {
 
     #[test]
     fn test_byte_bool_toggle() {
-        let mut byte_bool = ByteBool::new();
+        let mut byte_bool = ByteBool::default();
 
         // Toggle from 0 to 1
         byte_bool.toggle(2);
@@ -61,7 +61,7 @@ mod tests {
 
     #[test]
     fn test_byte_bool_clear() {
-        let mut byte_bool = ByteBool::new();
+        let mut byte_bool = ByteBool::default();
         for i in 0..=7 {
             byte_bool.set(i, true);
         }
@@ -74,21 +74,21 @@ mod tests {
     #[test]
     #[should_panic]
     fn test_byte_bool_read_out_of_range() {
-        let byte_bool = ByteBool::new();
+        let byte_bool = ByteBool::default();
         byte_bool.read(8);
     }
 
     #[test]
     #[should_panic]
     fn test_byte_bool_set_out_of_range() {
-        let mut byte_bool = ByteBool::new();
+        let mut byte_bool = ByteBool::default();
         byte_bool.set(8, true);
     }
 
     #[test]
     #[should_panic]
     fn test_byte_bool_toggle_out_of_range() {
-        let mut byte_bool = ByteBool::new();
+        let mut byte_bool = ByteBool::default();
         byte_bool.toggle(8);
     }
 }
