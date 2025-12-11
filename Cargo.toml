@@ -1,6 +1,6 @@
 [package]
 name = "eight-booleans"           # crate name (hyphens allowed)
-version = "0.1.0"
+version = "0.2.0"
 authors = ["Adnane EL Mir <adnane.elmir1@gmail.com>","Mustapha Boutoub <mustaphaboutoubdev@gmail.com>"]
 edition = "2024"
 description = "A small Rust library to store and manipulate 8 booleans in a single byte."

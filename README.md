@@ -62,7 +62,7 @@ The `Index` struct ensures type-safe bit indexing:
 use eight_booleans::ByteBool;
 
 fn main() {
-    let mut bits = ByteBool::new();
+    let mut bits = ByteBool::default()();
     
     // Set some bits
     bits.set(0, true);
